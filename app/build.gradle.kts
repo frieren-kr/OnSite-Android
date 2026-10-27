@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "kr.onsite.myapplication"
+    namespace = "kr.onsite.app"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "kr.onsite.myapplication"
+        applicationId = "kr.onsite.app"
         minSdk = 26
         targetSdk = 37
         versionCode = 1

@@ -1,4 +1,4 @@
-package kr.onsite.myapplication
+package kr.onsite.app
 
 import org.junit.Test
 

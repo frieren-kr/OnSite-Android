@@ -1,4 +1,4 @@
-package kr.onsite.myapplication.ui.theme
+package kr.onsite.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
