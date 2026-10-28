@@ -32,6 +32,8 @@ android {
     }
     buildFeatures {
         compose = true
+        // BuildConfig.DEBUG로 "디버그 빌드에서만 위치 로그"를 구분하기 위해 켠다.
+        buildConfig = true
     }
 }
 
@@ -44,6 +46,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

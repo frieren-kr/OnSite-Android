@@ -7,41 +7,28 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import kr.onsite.app.feature.geofence.GeofenceDebugScreen
+import kr.onsite.app.feature.geofence.GeofenceManager
 import kr.onsite.app.ui.theme.OnSiteTheme
 
 class MainActivity : ComponentActivity() {
+
+    // applicationContext를 넘겨 Activity가 다시 만들어져도(화면 회전 등) 누수가 없게 한다.
+    private val geofenceManager by lazy { GeofenceManager(applicationContext) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             OnSiteTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    GeofenceDebugScreen(
+                        manager = geofenceManager,
+                        modifier = Modifier.padding(innerPadding),
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    OnSiteTheme {
-        Greeting("Android")
     }
 }

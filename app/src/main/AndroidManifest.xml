@@ -2,7 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- 지오펜스는 정밀 위치(FINE)가 있어야 등록된다. COARSE는 FINE과 함께 요청해야 한다(Android 12+ 규칙). -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 앱이 꺼져 있을 때도 지오펜스 이벤트를 받으려면 필요 (Android 10+). -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <!-- Android 13+에서 알림을 띄우려면 필요. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
+        android:name=".OnSiteApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,6 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Play services가 우리 앱의 PendingIntent로 직접 호출하므로 외부 공개(exported)가 필요 없다. -->
+        <receiver
+            android:name=".feature.geofence.GeofenceBroadcastReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>
