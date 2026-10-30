@@ -63,6 +63,8 @@ kr.onsite.app
 - `AndroidManifest`에 `usesCleartextTraffic="true"` 넣지 않는다. 로컬 서버 테스트가 필요하면 debug 전용 `network_security_config`로 `10.0.2.2`만 허용한다.
 - 네이버 지도 Client ID 등 키는 `local.properties`에 두고 Gradle로 읽어 `manifestPlaceholders`/`BuildConfig`에 넣는다. `local.properties`는 커밋하지 않는다(기본 `.gitignore`에 포함됨).
 - 서명 키(`*.jks`)는 저장소 밖에 둔다.
+- 테스트는 dev DB의 test-로 시작하는 계정(test-a@onsite.dev, test-b@onsite.dev)으로만 한다. 실제 사용자 계정으로 로그인·비밀번호 변경·세션 삭제를 하지 않는다. test 계정이 없으면 멈추고 사용자에게 알린다.
+- 테스트 중에 코드를 고쳐야 하면 고치기 전에 무엇을 왜 고칠지 먼저 보고한다.
 
 ## 6. 위치·지오펜싱 규칙
 

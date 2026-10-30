@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    debug 빌드 전용. Android 9+는 기본적으로 암호화되지 않은 http 통신을 막는다.
+    로컬 개발 서버(npm run dev)는 https가 아니므로, 에뮬레이터에서 PC를 가리키는 10.0.2.2만 예외로 허용한다.
+    src/debug 아래에 있어서 release 빌드에는 아예 포함되지 않는다.
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">10.0.2.2</domain>
+    </domain-config>
+</network-security-config>

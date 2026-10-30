@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -20,7 +21,14 @@ android {
     }
 
     buildTypes {
+        // 서버 주소는 코드에 하드코딩하지 않고 빌드 종류별로 BuildConfig.BASE_URL에 주입한다.
+        debug {
+            // 10.0.2.2 = 에뮬레이터에서 본 "개발 PC의 localhost". npm run dev 서버(3000번)로 연결된다.
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000\"")
+        }
         release {
+            // TODO: 운영 배포 시 운영 서버의 https 주소로 바꾼다. (release는 http 통신이 막혀 있다)
+            buildConfigField("String", "BASE_URL", "\"TODO_RELEASE_URL\"")
             optimization {
                 enable = false
             }
@@ -48,6 +56,14 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.play.services.location)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.kotlinx.serialization)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

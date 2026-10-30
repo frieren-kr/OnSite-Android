@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-   Sample backup rules file; uncomment and customize as necessary.
-   See https://developer.android.com/guide/topics/data/autobackup
-   for details.
-   Note: This file is ignored for devices older than API 31
-   See https://developer.android.com/about/versions/12/backup-restore
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Android 11 이하(API 30 이하)의 자동 백업 규칙. API 31+는 data_extraction_rules.xml을 쓴다.
+    로그인 토큰이 든 DataStore 파일(files/datastore/auth.preferences_pb)은 백업하지 않는다.
+    토큰은 Android Keystore 키로 암호화돼 있는데, Keystore 키는 기기 밖으로 나가지 않아 백업·복원되지 않는다.
+    파일만 새 기기로 복원되면 "풀 수 없는 암호문"이 남을 뿐이고, 백업본 자체도 토큰 유출 경로가 될 수 있으므로 둘 다 막는다.
 -->
 <full-backup-content>
-    <!--
-   <include domain="sharedpref" path="."/>
-   <exclude domain="sharedpref" path="device.xml"/>
--->
+    <exclude domain="file" path="datastore/auth.preferences_pb" />
 </full-backup-content>

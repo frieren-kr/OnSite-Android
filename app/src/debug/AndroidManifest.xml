@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- debug 빌드에만 합쳐지는 매니페스트. main 매니페스트에 이 속성을 넣지 않아야 release에 http 허용이 섞이지 않는다. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Android 17(API 37)부터 targetSdk 37 이상 앱은 이 권한 없이 사설 IP(10.0.2.2 등)에 접속할 수 없다.
+        로컬 개발 서버에 붙을 때만 필요하고, 운영 서버(공인 주소)에는 필요 없어서 debug에만 둔다.
+        런타임 권한이라 설치 후 한 번 허용해야 한다: adb shell pm grant kr.onsite.app android.permission.ACCESS_LOCAL_NETWORK
+    -->
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
+
+    <application android:networkSecurityConfig="@xml/network_security_config" />
+
+</manifest>
